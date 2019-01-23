@@ -1,0 +1,74 @@
+---
+title: "Jan22"
+output: html_document
+---
+
+## googleVis examples
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Installing packages
+```{r, echo=FALSE}
+library(googleVis)
+```
+
+## Org chart
+```{r, echo=TRUE}
+setwd("C:/Users/Cielo/Desktop/r")
+getwd()
+chart <- read_excel("chart.xlsx")
+Org <- gvisOrgChart(chart,
+options=list(width=600, height=250,
+size='large', allowCollapse=TRUE))
+plot(Org)
+```
+## Tree Map
+```{r, echo=TRUE}
+setwd("C:/Users/Cielo/Desktop/r")
+getwd()
+reg<- read_excel("region.xlsx")
+Tree <- gvisTreeMap(reg,
+"Region", "Parent",
+"Val", "Fac",
+options=list(fontSize=16))
+plot(Tree)
+```
+
+## Merging Chart
+```{r, echo=TRUE}
+setwd("C:/Users/Cielo/Desktop/r")
+getwd()
+place<- read_excel("place.xlsx")
+G <- gvisGeoChart(place, "Place", "Profit",
+options=list(width=300, height=300))
+T <- gvisTable(place,
+options=list(width=220, height=300))
+GT <- gvisMerge(G,T, horizontal=TRUE)
+plot(GT)
+```
+
+## Show Hurricane 
+```{r, echo=TRUE}
+setwd("C:/Users/Cielo/Desktop/r")
+getwd()
+typ<- read_excel("typh.xlsx")
+GeoMarker <- gvisGeoChart(typ, "LatLong",
+sizevar='Speed',
+colorvar="Pressure",
+options=list(region="PH"))
+plot(GeoMarker)
+```
+
+## Google maps
+```{r, echo=TRUE}
+setwd("C:/Users/Cielo/Desktop/r")
+getwd()
+typ<- read_excel("typh.xlsx")
+AndrewMap <- gvisMap(typ, "LatLong" , "Tip",
+options=list(showTip=TRUE,
+showLine=TRUE,
+enableScrollWheel=TRUE,
+mapType='terrain',
+useMapTypeControl=TRUE))
+plot(AndrewMap)
+```
